@@ -1,0 +1,279 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title>Hostel Management System</title>
+    <meta content="Responsive admin theme build on top of Bootstrap 4" name="description"/>
+    <meta content="Themesdesign" name="author"/>
+    <link rel="shortcut icon" href="{% static 'assets1/images/favicon.ico' %}">
+
+    <!--Morris Chart CSS -->
+    <link rel="stylesheet" href="{% static 'assets1/plugins/morris/morris.css' %}">
+
+    <link href="{% static 'assets1/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'assets1/css/metismenu.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'assets1/css/icons.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'assets1/css/style.css' %}" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+    <!-- Top Bar Start -->
+    <div class="topbar">
+
+        <!-- LOGO -->
+        <div class="topbar-left">
+            <a href="{% url 'student_page' %}" class="logo">
+                    <span class="logo-light">
+                            <i class="mdi mdi-camera-control"></i> Hostel
+                        </span>
+                <span class="logo-sm">
+                            <i class="mdi mdi-camera-control"></i>
+                        </span>
+            </a>
+        </div>
+
+        <nav class="navbar-custom">
+            <ul class="navbar-right list-inline float-right mb-0">
+
+                <li class="dropdown notification-list list-inline-item">
+                    <a class="nav-link dropdown-toggle arrow-none waves-effect" data-toggle="dropdown" href="#"
+                       role="button" aria-haspopup="false" aria-expanded="false">
+                        <i class="mdi mdi-bell-outline noti-icon"></i>
+
+                        {% if request.session.seen %}
+                        {% else %}
+                        {% if request.session.notification != 0 %}
+                        <span class="badge badge-pill badge-danger noti-icon-badge">{{request.session.notification}}</span>
+                        {% endif %}
+                        {% endif %}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated dropdown-menu-lg px-1">
+                        <!-- item-->
+                        <h6 class="dropdown-item-text">
+                            Notifications
+                        </h6>
+
+
+                        <!-- All-->
+                        <a href="{% url 'notification_view_student'  %}"
+                           class="dropdown-item text-center notify-all text-primary">
+                            View all <i class="fi-arrow-right"></i>
+                        </a>
+                    </div>
+                </li>
+                <!-- full screen -->
+                <li class="dropdown notification-list list-inline-item d-none d-md-inline-block">
+                    <a class="nav-link waves-effect" href="#" id="btn-fullscreen">
+                        <i class="mdi mdi-arrow-expand-all noti-icon"></i>
+                    </a>
+                </li>
+
+                <!-- notification -->
+
+                <li class="dropdown notification-list list-inline-item">
+                    <div class="dropdown notification-list nav-pro-img">
+                        <a class="dropdown-toggle nav-link arrow-none nav-user" data-toggle="dropdown" href="#"
+                           role="button" aria-haspopup="false" aria-expanded="false">
+                            <img src="{{request.user.student.photo.url}}" alt="user" class="rounded-circle">
+                            {{request.user}}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                            <a class="dropdown-item" href="{% url 'profile' %}"><i class="mdi mdi-account-circle"></i> Profile</a>
+                            <!-- item-->
+
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="{% url 'accounts:logout_view' %}"><i
+                                    class="mdi mdi-power text-danger"></i> Logout</a>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+
+            <ul class="list-inline menu-left mb-0">
+                <li class="float-left">
+                    <button class="button-menu-mobile open-left waves-effect">
+                        <i class="mdi mdi-menu"></i>
+                    </button>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </div>
+    <!-- Top Bar End -->
+
+    <!-- ========== Left Sidebar Start ========== -->
+    <div class="left side-menu">
+        <div class="slimscroll-menu" id="remove-scroll">
+
+            <!--- Sidemenu -->
+            <div id="sidebar-menu">
+                <!-- Left Menu Start -->
+                <ul class="metismenu" id="side-menu">
+                    <li class="menu-title">Menu</li>
+                    <li>
+                        <a href="{% url 'student_page' %}" class="waves-effect">
+                            <i class="icon-accelerator"></i> Dashboard
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="icon-paper-sheet"></i><span> Hostel Details <span
+                                class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
+                        <ul class="submenu">
+                            <li><a href="{% url 'hostel_student' %}">View Hostel Detail</a></li>
+
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="icon-paper-sheet"></i><span> Room Booking <span
+                                class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
+                        <ul class="submenu">
+                            <li><a href="{% url 'book_room' %}">Book Now </a></li>
+                            <li><a href="{% url 'booking_status' %}">Booking Status</a></li>
+
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="icon-paper-sheet"></i><span> Fee Payment<span
+                                class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
+                        <ul class="submenu">
+                            <li><a href="{% url 'view_fee_student' %}">View Fee </a></li>
+                            <li><a href="{% url 'payment_details' %}">Payment Details</a></li>
+
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="icon-paper-sheet"></i><span> Attendance<span
+                                class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
+                        <ul class="submenu">
+                            <li><a href="{% url 'view_attendance_student' %}">Attendance Details</a></li>
+
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="icon-paper-sheet"></i><span>  Food Details<span
+                                class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
+                        <ul class="submenu">
+                            <li><a href="{% url 'view_food_student' %}">View Food Updates</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="icon-paper-sheet"></i><span>Complaints<span
+                                class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
+                        <ul class="submenu">
+                            <li><a href="{% url 'send_complaint' %}">Send Complaint</a></li>
+                            <li><a href="{% url 'view_send_compalints' %}">view Complaint</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="icon-paper-sheet"></i><span>Delete Account<span
+                                class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
+                        <ul class="submenu">
+                            <li><a href="{% url 'delete_profile_student' %}">Delete Now</a></li>
+
+                        </ul>
+                    </li>
+
+
+
+
+                </ul>
+
+
+            </div>
+            <!-- Sidebar -->
+            <div class="clearfix"></div>
+
+        </div>
+        <!-- Sidebar -left -->
+
+    </div>
+    <!-- Left Sidebar End -->
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="page-title-box">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6">
+                            <h4 class="page-title">Dashboard</h4>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-right">
+                                <li class="breadcrumb-item"><a href="{% url 'student_page' %}">Home</a></li>
+                                <li class="breadcrumb-item active">Dashboard</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <!-- end row -->
+                </div>
+                <!-- end page-title -->
+
+                <div class="row">
+
+                    {% block student %} {% endblock %}
+
+                </div>
+
+
+            </div>
+            <!-- container-fluid -->
+
+        </div>
+        <!-- content -->
+
+        <footer class="footer">
+            © 2021 Hostel Management System <span class="d-none d-sm-inline-block">  <i
+                class="mdi mdi-heart text-danger"></i> </span>.
+        </footer>
+
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Right content here -->
+    <!-- ============================================================== -->
+
+</div>
+<!-- END wrapper -->
+
+<!-- jQuery  -->
+<script src="{% static 'assets1/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets1/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets1/js/metismenu.min.js' %}"></script>
+<script src="{% static 'assets1/js/jquery.slimscroll.js' %}"></script>
+<script src="{% static 'assets1/js/waves.min.js' %}"></script>
+
+<!--Morris Chart-->
+<script src="{% static 'assets1/plugins/morris/morris.min.js' %}"></script>
+<script src="{% static 'assets1/plugins/raphael/raphael.min.js' %}"></script>
+
+<script src="{% static 'assets1/pages/dashboard.init.js' %}"></script>
+
+<!-- App js -->
+<script src="{% static 'assets1/js/app.js' %}"></script>
+
+</body>
+
+</html>

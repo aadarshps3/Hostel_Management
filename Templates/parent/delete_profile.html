@@ -1,0 +1,28 @@
+{% extends 'parent/base.html' %}
+{% block parent %}
+
+<div class="col-lg-6">
+   <div class="card ">
+        <div class="card-header bg-primary" >
+            <strong class="card-title " style="color:white"></strong>
+        </div>
+        <div class="card-body">
+
+            <form method="post">{% csrf_token %}
+
+                <h1> Are You Sure Want to Delete Account?</h1>
+                <br>
+                <br>
+                <br>
+
+
+                <div >
+                    <button type="submit" class="btn btn-primary">YES</button>
+
+                </div>
+            </form>
+        </div>
+        </div>
+</div>
+{% endblock %}
+

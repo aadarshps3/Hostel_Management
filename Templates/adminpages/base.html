@@ -1,0 +1,297 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title>Hostel Management System</title>
+    <meta content="Responsive admin theme build on top of Bootstrap 4" name="description"/>
+    <meta content="Themesdesign" name="author"/>
+    <link rel="shortcut icon" href="{% static 'assets1/images/favicon.ico' %}">
+
+    <!--Morris Chart CSS -->
+    <link rel="stylesheet" href="{% static 'assets1/plugins/morris/morris.css' %}">
+
+    <link href="{% static 'assets1/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'assets1/css/metismenu.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'assets1/css/icons.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'assets1/css/style.css' %}" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+    <!-- Top Bar Start -->
+    <div class="topbar">
+
+        <!-- LOGO -->
+        <div class="topbar-left">
+            <a href="{% url 'admin_page' %}" class="logo">
+                    <span class="logo-light">
+                            <i class="mdi mdi-camera-control"></i> Hostel
+                        </span>
+                <span class="logo-sm">
+                            <i class="mdi mdi-camera-control"></i>
+                        </span>
+            </a>
+        </div>
+
+        <nav class="navbar-custom">
+            <ul class="navbar-right list-inline float-right mb-0">
+
+
+                <!-- full screen -->
+                <li class="dropdown notification-list list-inline-item d-none d-md-inline-block">
+                    <a class="nav-link waves-effect" href="#" id="btn-fullscreen">
+                        <i class="mdi mdi-arrow-expand-all noti-icon"></i>
+                    </a>
+                </li>
+
+                <!-- notification -->
+
+                <li class="dropdown notification-list list-inline-item">
+                    <div class="dropdown notification-list nav-pro-img">
+                        <a class="dropdown-toggle nav-link arrow-none nav-user" data-toggle="dropdown" href="#"
+                           role="button" aria-haspopup="false" aria-expanded="false">
+                            <img src="{% static 'assets1/images/users/user-4.jpg' %}" alt="user" class="rounded-circle">
+                            {{request.user}}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                            <!-- item-->
+
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="{% url 'accounts:logout_view' %}"><i
+                                    class="mdi mdi-power text-danger"></i> Logout</a>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+
+            <ul class="list-inline menu-left mb-0">
+                <li class="float-left">
+                    <button class="button-menu-mobile open-left waves-effect">
+                        <i class="mdi mdi-menu"></i>
+                    </button>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </div>
+    <!-- Top Bar End -->
+
+    <!-- ========== Left Sidebar Start ========== -->
+    <div class="left side-menu">
+        <div class="slimscroll-menu" id="remove-scroll">
+
+            <!--- Sidemenu -->
+            <div id="sidebar-menu">
+                <!-- Left Menu Start -->
+                <ul class="metismenu" id="side-menu">
+                    <li class="menu-title">Menu</li>
+                    <li>
+                        <a href="{% url 'admin_page' %}" class="waves-effect">
+                            <i class="icon-accelerator"></i> Dashboard
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="icon-paper-sheet"></i><span> Hostel Details <span
+                                class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
+                        <ul class="submenu">
+                            <li><a href="{% url 'add_hostel_detail' %}">Add Hostel Detail </a></li>
+                            <li><a href="{% url 'view_hostel_detail' %}">View Hostel Detail</a></li>
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0);" class="waves-effect"><i
+                                class="icon-spread"></i><span> Food Details <span class="float-right menu-arrow"><i
+                                class="mdi mdi-chevron-right"></i></span> </span></a>
+                        <ul class="submenu">
+                            <li><a href="{% url 'add_food_detail' %}">Add Food</a></li>
+                            <li><a href="{% url 'view_food_detail' %}">View food</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="waves-effect"><i
+                                class="icon-spread"></i><span> Complaints <span class="float-right menu-arrow">
+                            <i class="mdi mdi-chevron-right"></i></span></span>
+
+                                {% if request.session.complaint == 0 %}
+                                {% else %}
+                                <span class="badge badge-danger badge-pill float-right">{{request.session.complaint}}  </span>
+                            {% endif %}
+                          </a>
+                        <ul class="submenu">
+                            <li><a href="{% url 'view_complaint' %}">View Complaints</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="javascript:void(0);" class="waves-effect"><i
+                                class="icon-spread"></i><span> Payment <span class="float-right menu-arrow"><i
+                                class="mdi mdi-chevron-right"></i></span> </span></a>
+                        <ul class="submenu">
+                            <li><a href="{% url 'add_fee' %}">Add Fee</a></li>
+                            <li><a href="{% url 'view_fee' %}">View Fee</a></li>
+                            <li><a href="{% url 'view_payment' %}">View Payment</a></li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="waves-effect"><i
+                                class="icon-spread"></i><span> Notification <span class="float-right menu-arrow"><i
+                                class="mdi mdi-chevron-right"></i></span> </span></a>
+                        <ul class="submenu">
+                            <li><a href="{% url 'add_notification' %}">Add Notifications</a></li>
+                            <li><a href="{% url 'view_notification' %}">View Notifications</a></li>
+                        </ul>
+                    </li>
+                     <li>
+                        <a href="javascript:void(0);" class="waves-effect"><i
+                                class="icon-spread"></i><span> Attendance <span class="float-right menu-arrow"><i
+                                class="mdi mdi-chevron-right"></i></span> </span></a>
+                        <ul class="submenu">
+                            <li><a href="{% url 'add_attendance' %}">Add Attendance</a></li>
+                            <li><a href="{% url 'view_attendance' %}">View Attendance</a></li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="waves-effect">
+                            <i class="icon-spread"></i><span> Staff <span class="float-right menu-arrow">
+                            <i class="mdi mdi-chevron-right"></i></span> </span></a>
+                        <ul class="submenu">
+                            <li><a href="{% url 'add_staff' %}">Add Staff</a></li>
+                            <li><a href="{% url 'view_staff' %}">View Staff</a></li>
+
+                        </ul>
+                    </li>
+
+                     <li>
+                        <a href="javascript:void(0);" class="waves-effect">
+                            <i class="icon-spread"></i><span> Registration <span class="float-right menu-arrow"><i
+                                class="mdi mdi-chevron-right"></i></span> </span></a>
+                        <ul class="submenu">
+                            <li><a href="{% url 'view_registration_details' %}">View Registration</a></li>
+                        </ul>
+                    </li>
+                     <li>
+                        <a href="javascript:void(0);" class="waves-effect">
+                            <i class="icon-spread"></i><span> Bookings <span class="float-right menu-arrow"><i
+                                class="mdi mdi-chevron-right"></i></span> </span>
+                          {% if request.session.booking == 0 %}
+                                {% else %}
+                                <span class="badge badge-danger badge-pill float-right">{{request.session.booking}}  </span>
+                            {% endif %}
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="{% url 'bookings' %}">View Bookings</a></li>
+                        </ul>
+                    </li>
+                     <li>
+                        <a href="javascript:void(0);" class="waves-effect">
+                            <i class="icon-spread"></i><span> Review <span class="float-right menu-arrow"><i
+                                class="mdi mdi-chevron-right"></i></span> </span>
+                          {% if request.session.review == 0 %}
+                                {% else %}
+                                <span class="badge badge-danger badge-pill float-right">{{request.session.review}}  </span>
+                            {% endif %}
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="{% url 'review' %}">View Reviews</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Sidebar -->
+            <div class="clearfix"></div>
+
+        </div>
+        <!-- Sidebar -left -->
+
+    </div>
+    <!-- Left Sidebar End -->
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="content-page">
+        <!-- Start content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="page-title-box">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6">
+                            <h4 class="page-title">Dashboard</h4>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-right">
+                                <li class="breadcrumb-item"><a href="{% url 'admin_page' %}">Home</a></li>
+                                <li class="breadcrumb-item active">Dashboard</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <!-- end row -->
+                </div>
+                <!-- end page-title -->
+
+                <div class="row">
+
+                    {% block content %}
+                    {% endblock %}
+
+
+                </div>
+
+
+            </div>
+            <!-- container-fluid -->
+
+        </div>
+        <!-- content -->
+
+        <footer class="footer">
+            © 2021 Hostel Management System <span class="d-none d-sm-inline-block">  <i
+                class="mdi mdi-heart text-danger"></i> </span>.
+        </footer>
+
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Right content here -->
+    <!-- ============================================================== -->
+
+</div>
+<!-- END wrapper -->
+
+<!-- jQuery  -->
+<script src="{% static 'assets1/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets1/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets1/js/metismenu.min.js' %}"></script>
+<script src="{% static 'assets1/js/jquery.slimscroll.js' %}"></script>
+<script src="{% static 'assets1/js/waves.min.js' %}"></script>
+
+<!--Morris Chart-->
+<script src="{% static 'assets1/plugins/morris/morris.min.js' %}"></script>
+<script src="{% static 'assets1/plugins/raphael/raphael.min.js' %}"></script>
+
+<script src="{% static 'assets1/pages/dashboard.init.js' %}"></script>
+
+<!-- App js -->
+<script src="{% static 'assets1/js/app.js' %}"></script>
+
+</body>
+
+</html>

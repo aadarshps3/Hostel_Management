@@ -1,0 +1,43 @@
+{% extends 'student/base.html' %}
+{% block student %}
+
+<div class="col-lg-8">
+        {% for message in messages %}
+    <div class="alert alert-info" role="alert">
+       {{message}}
+    </div>
+    {% endfor %}
+    <div class="card">
+       <div class="card-header bg-primary">
+            <strong class="card-title" style="color:white">HOSTEL DETAILS</strong>
+        </div>
+        <div class="card-body">
+            {% for detail in details %}
+            <div class="card" style="width: 18rem;">
+                <img src="{{detail.image1.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img src="{{detail.image2.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img src="{{detail.image3.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'adminpages/base.html' %}
+{% block content %}
+
+<div class="col-lg-8">
+        {% for message in messages %}
+    <div class="alert alert-info" role="alert">
+       {{message}}
+    </div>
+    {% endfor %}
+    <div class="card">
+
+        <div class="card-header bg-primary">
+            <strong class="card-title " style="color:white">FOOD DETAILS</strong>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">SINo</th>
+                    <th scope="col">Breakfast</th>
+                    <th scope="col">Lunch</th>
+                    <th scope="col">Dinner</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for food in foods %}
+                <tr>
+
+                    <td>{{forloop.counter}}</td>
+                    <td>{{food.breakfast}}</td>
+                    <td>{{food.lunch}}</td>
+                    <td>{{food.dinner}}</td>
+                    <td><a href="{% url 'update_food_detail' food.id %}" class="btn btn-primary">Update</a></td>
+                    <td><a href="{% url 'delete_food_detail' food.id %}" class="btn btn-danger">Delete</a></td>
+
+
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends 'student/base.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% block student %}
+
+
+<div class="col-lg-10">
+    {% for message in messages %}
+    <div class="alert alert-info" role="alert">
+        {{message}}
+    </div>
+    {% endfor %}
+    <div class="col-lg-12">
+        <div class="card ">
+
+            <div class="card-body">
+
+
+                <div class="modal bs-example-modal" style="width:950px">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title mt-0" ><i
+                                        class="mdi mdi-account-circle"></i>My Profile </h5>
+
+                            </div>
+                            <div class="modal-body" style="text-align:center;">
+
+                                <img class="rounded-circle" src="{{students.photo.url}}" data-holder-rendered="true" style="height:250px;width:210px;">
+
+                                <hr>
+
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <i class="ti-user"></i>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <label>:{{students.name}}</label>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <i class="ti-mobile"></i>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label>:{{students.phone_no}}</label>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <i class="ti-email"></i>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label>:{{students.email}}</label>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <i class="ti-home"></i>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label>:{{students.address}}</label>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <a href="{% url 'update_profile' %}" class="btn btn-primary">Update</a>
+                                <a href="{% url 'delete_profile_student' %}" class="btn btn-danger">Delete Account</a>
+
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

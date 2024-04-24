@@ -1,0 +1,53 @@
+{% extends 'student/base.html' %}
+{% block student %}
+
+<div class="col-lg-8">
+        {% for message in messages %}
+    <div class="alert alert-info" role="alert">
+       {{message}}
+    </div>
+    {% endfor %}
+    <div class="card">
+        <div class="card-header bg-primary">
+            <strong class="card-title" style="color:white">FEE</strong>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">SINo</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Accommodation</th>
+                    <th scope="col">Electricity</th>
+                    <th scope="col">Caution Deposit</th>
+                    <th scope="col">Security</th>
+                    <th scope="col">Mess</th>
+                    <th scope="col">Others</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for fee in fees %}
+                <tr>
+
+                    <td>{{forloop.counter}}</td>
+                    <td>{{fee.name}}</td>
+                    <td>{{fee.accommodation}}</td>
+                    <td>{{fee.electricity}}</td>
+                    <td>{{fee.caution_deposit}}</td>
+                    <td>{{fee.security}}</td>
+                    <td>{{fee.mess}}</td>
+                    <td>{{fee.others}}</td>
+
+
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,147 @@
+{% extends 'student/base.html' %}
+{% block student %}
+
+<div class="col-lg-8">
+        {% for message in messages %}
+    <div class="alert alert-info" role="alert">
+       {{message}}
+    </div>
+    {% endfor %}
+    <div class="card">
+        <div class="card-header bg-primary">
+            <strong class="card-title" style="color:white">HOSTEL DETAILS</strong>
+        </div>
+        <div class="card-body">
+            {% for detail in details %}
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Total Rooms</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <label>:{{detail.total_rooms}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Occupied</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <label>:{{detail.occupied}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Floor no</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <label>:{{detail.floor_no}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Available Beds</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <label>:{{detail.available_beds}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Vaccant Beds</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <label>:{{detail.Vaccant_beds}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Anual Expenses</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <label>:{{detail.annual_expenses}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Location</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <label>:{{detail.location}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Contact No</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <label>:{{detail.contact_no}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Room Facilities</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <label>:{{detail.room_facilities}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Hostel Photos</label>
+                    </div>
+                    <div>
+                        <div class="card" style="width: 10rem;">
+                            <img src="{{detail.image1.url}}" class="card-img-top" alt="..." height="100px">
+                            <div class="card-body">
+
+                            </div>
+                        </div>
+                        <div class="card" style="width: 10rem;">
+                            <img src="{{detail.image2.url}}" class="card-img-top" alt="..." height="100px">
+                            <div class="card-body">
+
+                            </div>
+                        </div>
+                        <div class="card" style="width: 10rem;">
+                            <img src="{{detail.image3.url}}" class="card-img-top" alt="..." height="100px">
+                            <div class="card-body">
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--                 -->
+                    <!--                        <label>:<img src="{{detail.image1.url}}"></label>-->
+                    <!--                        <label><img src="{{detail.image2.url}}"></label>-->
+                    <!--                        <label><img src="{{detail.image3.url}}"></label>-->
+
+                </div>
+            </div>
+        </div>
+
+
+        {% endfor %}
+    </div>
+</div>
+
+</div>
+
+{% endblock %}

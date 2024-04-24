@@ -1,0 +1,52 @@
+{% extends 'student/base.html' %}
+{% block student %}
+
+
+<div class="col-lg-8">
+        {% for message in messages %}
+    <div class="alert alert-info" role="alert">
+       {{message}}
+    </div>
+    {% endfor %}
+    <div class="card">
+        <div class="card-header bg-primary">
+            <strong class="card-title" style="color:white">NOTIFICATIONS</strong>
+        </div>
+        <div class="card-body">
+            <table class="table">
+  <thead >
+    <tr>
+      <th scope="col">SINo</th>
+      <th scope="col">To</th>
+      <th scope="col">Notification</th>
+      <th scope="col">Time</th>
+
+    </tr>
+  </thead>
+  <tbody>
+       {% for notification in notifications %}
+    <tr>
+
+        <td>{{forloop.counter}}</td>
+        <td>{{notification.to}}</td>
+        <td>{{notification.notification}}</td>
+        <td>{{notification.time}}</td>
+
+
+
+
+    </tr>
+        {% endfor %}
+
+  </tbody>
+</table>
+
+
+
+</div>
+    </div>
+</div>
+
+
+
+{% endblock %}

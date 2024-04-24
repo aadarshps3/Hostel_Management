@@ -1,0 +1,46 @@
+{% extends 'adminpages/base.html' %}
+{% block content %}
+
+<div class="col-lg-8">
+        {% for message in messages %}
+    <div class="alert alert-info" role="alert">
+       {{message}}
+    </div>
+    {% endfor %}
+    <div class="card">
+
+        <div class="card-header bg-primary" >
+            <strong class="card-title " style="color:white">STUDENT ATTENDANCE ON {{date}}</strong>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">SINo</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Attendance</th>
+                    <th scope="col">Time</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for attendance in attendances %}
+                        <tr>
+                            <td>{{forloop.counter }}</td>
+                            <td>{{attendance.student}}</td>
+                            <td>{{attendance.attendance}}</td>
+                            <td>{{attendance.time}}</td>
+                        </tr>
+                        {% endfor %}
+
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

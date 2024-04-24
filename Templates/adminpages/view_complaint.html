@@ -1,0 +1,49 @@
+{% extends 'adminpages/base.html' %}
+{% block content %}
+
+<div class="col-lg-8">
+        {% for message in messages %}
+    <div class="alert alert-info" role="alert">
+       {{message}}
+    </div>
+    {% endfor %}
+    <div class="card ">
+        <div class="card-header bg-primary" >
+            <strong class="card-title " style="color:white">COMPLAINTS</strong>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">SINo</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Complaint</th>
+                    <!--      <th scope="col">Update</th>-->
+                    <!--      <th scope="col">Delete</th>-->
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for complaint in complaints %}
+                <tr>
+
+                    <td>{{forloop.counter}}</td>
+                    <td>{{complaint.name}}</td>
+                    <td>{{complaint.subject}}</td>
+                    <td>{{complaint.complaint}}</td>
+
+
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

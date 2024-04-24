@@ -1,0 +1,68 @@
+{% extends 'adminpages/base.html' %}
+{% block content %}
+
+<div class="col-lg-12">
+        {% for message in messages %}
+    <div class="alert alert-info" role="alert">
+       {{message}}
+    </div>
+    {% endfor %}
+    <div class="card">
+
+        <div class="card-header  bg-primary">
+            <strong class="card-title " style="color:white">HOSTEL DETAILS</strong>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">SINo</th>
+                    <th scope="col">Total rooms</th>
+                    <th scope="col">Occupied</th>
+                    <th scope="col">Annual Expense</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Contact Number</th>
+                    <th scope="col">Room Facilities</th>
+                    <th scope="col">Image1</th>
+                    <th scope="col">Image2</th>
+                    <th scope="col">Image3</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for detail in details %}
+                <tr>
+
+                    <td>{{forloop.counter}}</td>
+                    <td>{{detail.total_rooms}}</td>
+                    <td>{{detail.occupied}}</td>
+                    <td>{{detail.annual_expenses}}</td>
+                    <td>{{detail.location}}</td>
+                    <td>{{detail.contact_no}}</td>
+                    <td>{{detail.room_facilities}}</td>
+                    <td><img src="{{detail.image1.url}}" style="width:100px"></td>
+                    <td><img src="{{detail.image2.url}}" style="width:100px"></td>
+                    <td><img src="{{detail.image3.url}}" style="width:100px"></td>
+                    <td>
+                        <a href="{% url 'update_hostel_detail' detail.id %}" class="btn btn-primary">Update</a>
+                    </td>
+                    <td>
+                        <a href="{% url 'delete_hostel_detail' detail.id %}" class="btn btn-danger">Delete</a>
+                    </td>
+
+
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

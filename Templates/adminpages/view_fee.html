@@ -1,0 +1,58 @@
+{% extends 'adminpages/base.html' %}
+{% block content %}
+
+<div class="col-lg-10">
+        {% for message in messages %}
+    <div class="alert alert-info" role="alert">
+       {{message}}
+    </div>
+    {% endfor %}
+
+        <div class="card ">
+        <div class="card-header bg-primary" >
+            <strong class="card-title " style="color:white">FEE DETAILS</strong>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">SINo</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">From Date</th>
+                    <th scope="col">To Date</th>
+                    <th scope="col">Room Rent</th>
+                    <th scope="col">Mess Bill</th>
+                    <th scope="col">Total</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for fee in fees %}
+                <tr>
+
+                    <td>{{forloop.counter}}</td>
+                    <td>{{fee.student}}</td>
+                    <td>{{fee.from_date}}</td>
+                    <td>{{fee.to_date}}</td>
+                    <td>{{fee.room_rent}}</td>
+                    <td>{{fee.mess_bill}}</td>
+                    <td>{{fee.get_total}}</td>
+
+
+                </tr>
+
+
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

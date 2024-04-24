@@ -1,0 +1,68 @@
+{% extends 'adminpages/base.html' %}
+{% load crispy_forms_filters %}
+{% block content %}
+
+
+<div class="col-lg-6">
+        {% for message in messages %}
+    <div class="alert alert-info" role="alert">
+       {{message}}
+    </div>
+    {% endfor %}
+    <div class="card ">
+        <div class="card-header bg-primary" >
+            <strong class="card-title " style="color:white">ADD STUDENT FEE</strong>
+        </div>
+        <div class="card-body">
+            <div class="card-title">
+                <h3 class="text-center"></h3>
+            </div>
+
+            <form method="post" id="form" data-bill-url="{% url 'ajax_load_bill' %}"> {% csrf_token %}
+                {% csrf_token %}
+
+                <div class="form-group ">
+                    {{form|crispy}}
+                </div>
+
+                <button class=" btn btn-info" type="submit">ADD</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $("#id_to_date").change(function () {
+        const url = $("#form").attr("data-bill-url");
+
+        const to_date = $(this).val();
+       const from_date = document.getElementById("id_from_date").value;
+       const studentId = document.getElementById("id_student").value;
+
+
+
+        $.ajax({
+            url: url,
+            data: {
+                'to_date': to_date,
+                'from_date': from_date,
+                'studentId': studentId,
+
+            },
+            success: function (data) {
+
+                $( "#id_mess_bill" ).val(data.mess_bill);
+                $( "#id_room_rent" ).val(data.room_rent);
+
+
+                }
+
+        });
+
+    });
+
+
+</script>
+{% endblock %}

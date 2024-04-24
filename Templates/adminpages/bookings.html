@@ -1,0 +1,59 @@
+{% extends 'adminpages/base.html' %}
+{% block content %}
+
+<div class="col-lg-8">
+    {% for message in messages %}
+    <div class="alert alert-info" role="alert">
+        {{message}}
+    </div>
+    {% endfor %}
+    <div class="card ">
+        <div class="card-header bg-primary">
+            <strong class="card-title " style="color:white">BOOKING DETAILS</strong>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">SINo</th>
+                    <th scope="col">Student Name</th>
+                    <th scope="col">Booked By</th>
+                    <th scope="col">Booking Date</th>
+                    <th scope="col">Joining Date</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for book in books %}
+                <tr>
+
+                    <td>{{forloop.counter}}</td>
+                    <td>{{book.student}}</td>
+                    <td>{{book.booked_by}}</td>
+                    <td>{{book.booking_date}}</td>
+                    <td>{{book.date_joining}}</td>
+                    <td>
+                        {% if book.status == 0 %}
+                        <a class="btn btn-primary" href="{% url 'confirm_booking' book.id %}">Approve</a>
+                        <a class="btn btn-danger" href="{% url 'reject_booking' book.id %}">Reject</a>
+                        {% elif book.status == 1 %}
+                        <p class="btn btn-success">Approved</p>
+                        {% elif book.status == 2 %}
+                        <p class="btn btn-danger">Rejected</p>
+                        {% endif %}
+                    </td>
+
+
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

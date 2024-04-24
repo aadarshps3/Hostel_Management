@@ -1,0 +1,109 @@
+{% extends 'adminpages/base.html' %}
+{% block content %}
+
+<div class="col-lg-12">
+        {% for message in messages %}
+    <div class="alert alert-info" role="alert">
+       {{message}}
+    </div>
+    {% endfor %}
+    <div class="card">
+
+        <div class="card-header  bg-primary">
+            <strong class="card-title " style="color:white">STUDENT REGISTRATIONS</strong>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">SINo</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone No</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Course</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for student in students %}
+                <tr>
+
+                    <td>{{forloop.counter}}</td>
+                    <td>{{student.name}}</td>
+                    <td>{{student.phone_no}}</td>
+                    <td>{{student.email}}</td>
+                    <td>{{student.address}}</td>
+                    <td>{{student.course}}</td>
+                    <td>{{student.user.username}}</td>
+                    <td>
+                        {% if student.approval_status == 0 %}
+                        <a class="btn btn-success" href="{% url 'approve_student' student.user_id %}">Approve</a>
+                        <a class="btn btn-danger" href="{% url 'reject_student' student.user_id %}">Reject</a>
+                        {% elif student.approval_status == True %}
+                        <p class="btn btn-success">Approved</p>
+                        {% else %}
+                        <p class="btn btn-danger">Rejected</p>
+                        {% endif %}
+                    </td>
+
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="card">
+
+        <div class="card-header bg-primary ">
+            <strong class="card-title " style="color:white">PARENT REGISTRATIONS</strong>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">SINo</th>
+                    <th scope="col">Student Name</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone No</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody> {% for parent in parents %}
+                <tr>
+
+                    <td>{{forloop.counter}}</td>
+                    <td>{{parent.student_name}}</td>
+                    <td>{{parent.name}}</td>
+                    <td>{{parent.phone_no}}</td>
+                    <td>{{parent.email}}</td>
+                    <td>{{parent.address}}</td>
+                    <td>{{parent.user.username}}</td>
+                    <td>
+                        {% if parent.approval_status == 0 %}
+                        <a class="btn btn-success" href="{% url 'approve_parent' parent.user_id %}">Approve</a>
+                        <a class="btn btn-danger" href="{% url 'reject_parent' parent.user_id %}">Reject</a>
+                        {% elif parent.approval_status == True %}
+                        <p class="btn btn-success">Approved</p>
+                        {% else %}
+                        <p class="btn btn-danger">Rejected</p>
+                        {% endif %}
+                    </td>
+
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
